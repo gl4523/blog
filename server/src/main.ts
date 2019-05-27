@@ -1,15 +1,21 @@
 import Koa = require('koa')
-import {createServer} from 'http'
-import {promisify} from 'util'
+import http = require('http')
+import {connect} from 'mongoose'
+const Logger = require('koa-logger')
+const {promisify} = require('util')
+const bindRoutes = require('./modules')
+import {ServerPort, DBUrl} from './const'
 
 const app = new Koa()
-const server = createServer(app.callback())
+const server = http.createServer(app.callback())
 
+app.use(Logger())
 
-require('./modules')(app)
+// 绑定路由
+bindRoutes(app)
 
 !(async () => {
-    const port = 8085;
-    await promisify(server.listen).call(server, port, undefined)
-    console.log(`Server open on Port : ${port}`)
+    await connect(DBUrl)
+    await promisify(server.listen).call(server, ServerPort, undefined)
+    console.log(`Server open on Port : ${ServerPort}`)
 })()
