@@ -7,7 +7,7 @@ module.exports = {
         main: './src/main.tsx'
     },
     output: {
-        path: resolve(__dirname, '..', 'dist'),
+        path: resolve(__dirname, '..', 'docs'),
         publicPath: '/',
         filename: 'js/[name]_[hash:6].js'
     },
@@ -31,7 +31,7 @@ module.exports = {
     devServer: {
         hot: true,
         open: true,
-        contentBase: resolve(__dirname, '..', 'dist'),
+        contentBase: resolve(__dirname, '..', 'docs'),
         port: 8089,
         compress: true,
         overlay: true,
