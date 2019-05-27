@@ -5,9 +5,9 @@ import {promisify} from 'util'
 const app = new Koa()
 const server = createServer(app.callback())
 
-app.use((ctx, next) => {
-    ctx.body = 'hello'
-})
+
+require('./modules')(app)
+
 !(async () => {
     const port = 8085;
     await promisify(server.listen).call(server, port, undefined)
