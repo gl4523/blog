@@ -18,6 +18,24 @@ function findAll() {
 }
 
 /**
+ * 通过id获取数据
+ * @param id 
+ */
+function findById(_id: string) {
+  return new Promise((resolve, reject) => {
+    const query = Model.find()
+    query.setQuery({_id})
+    query.exec((err, res) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(res)
+      }
+    })
+  })
+}
+
+/**
  * 插入数据
  * @param body 
  */
@@ -28,5 +46,6 @@ function insert(body: any) {
 
 export default {
   findAll,
-  insert
+  insert,
+  findById
 }

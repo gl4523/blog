@@ -10,6 +10,17 @@ router.get('/list', async (ctx, next) => {
   ctx.body = list
 })
 
+// 获取blog
+router.get('/article/:id', async (ctx, next) => {
+  const id = ctx.params.id
+  const data = await ArticleModel.findById(id)
+  if (data && data[0]) {
+    ctx.body = {data: data[0], code: 0}
+  } else {
+    ctx.body = {code: 1}
+  }
+})
+
 // 添加内容
 router.post('/add', async (ctx, next) => {
   const request: any = ctx.request
