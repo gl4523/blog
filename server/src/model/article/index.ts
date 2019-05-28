@@ -17,4 +17,16 @@ function findAll() {
   })
 }
 
-export default {findAll}
+/**
+ * 插入数据
+ * @param body 
+ */
+function insert(body: any) {
+  const model = new Model(body)
+  return model.save()
+}
+
+export default {
+  findAll,
+  insert
+}
