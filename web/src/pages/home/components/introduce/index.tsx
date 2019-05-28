@@ -7,7 +7,7 @@ export default function (props) {
         <div className="introduce-container">
             <img src={HeadImg} className="head-img"/>
             <span className="introduce">
-                算法算法算法算法算法算法算法算法算法算法算法算法算法
+                学如逆水行舟，不进则退。一入前端深似海
             </span>
         </div>
     )

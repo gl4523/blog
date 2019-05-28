@@ -6,8 +6,12 @@ router.prefix('/blog')
 
 // 获取blog列表
 router.get('/list', async (ctx, next) => {
-  const list = await ArticleModel.findAll()
-  ctx.body = list
+  try {
+    const list = await ArticleModel.findAll()
+    ctx.body = {code: 0, data: list }
+  } catch (e) {
+    ctx.body = {code: 1, message: e}
+  }
 })
 
 // 获取blog

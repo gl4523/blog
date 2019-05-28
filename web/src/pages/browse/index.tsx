@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {RouteComponentProps} from 'react-router-dom'
 import ReactMarkDown from 'react-markdown'
 import Logo from '../../components/Logo'
+import {ServerUrl} from '../../const'
 import axios from 'axios'
 interface IBrowse {
     state: {
@@ -15,7 +16,7 @@ interface IBrowse {
     }
 }
 class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["state"]> {
-    private _cancelToken
+    private _cancelToken: {token, cancel}
     constructor(props) {
         super(props)
         this.state = {}
@@ -26,7 +27,7 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
     }
 
     componentWillUnmount() {
-        this._cancelToken && this._cancelToken("Operation canceled by the user")
+        this.getRequestCancelTag().cancel()
     }
 
     render() {
@@ -48,11 +49,10 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
      */
     fetchData() {
         const {id} = this.props.match.params
-        const url = 'http://localhost:8085/blog/article/5cece5a437689e1a0c986fdd'
-        const {cancel, token} = axios.CancelToken.source()
-        this._cancelToken = cancel
+        const url = `${ServerUrl}/blog/article/5ced4fd0fafa7c072862dd5f`
+
         axios.get(url, {
-            cancelToken: token
+            cancelToken: this.getRequestCancelTag().token
         }).then(res => {
             const {code, data} = res.data
             if (code) {
@@ -63,6 +63,16 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
                 })
             }
         }).catch(console.log)
+    }
+
+    /**
+     * 获取请求取消Token
+     */
+    getRequestCancelTag = (): {token, cancel} => {
+        if (!this._cancelToken) {
+            this._cancelToken = axios.CancelToken.source()
+        }
+        return this._cancelToken
     }
 }
 

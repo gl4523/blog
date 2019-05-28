@@ -1,0 +1,17 @@
+.studio-container {
+  .from-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+    input, textarea {
+      flex: 1;
+      margin-left: 10px;
+      position: relative;
+      top: -2px;
+    }
+    & + .from-item {
+      margin-top: 14px;
+    }
+  }
+}

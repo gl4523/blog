@@ -3,6 +3,7 @@ import ReactMarkDown from 'react-markdown'
 import {Switch, Route, HashRouter} from 'react-router-dom'
 import Home from './pages/home'
 import Browse from './pages/browse'
+import Studio from './pages/studio'
 class App extends Component {
     render() {
         // const markdown = '## 标题\n```js\nfunction\n```'
@@ -16,6 +17,7 @@ class App extends Component {
                 <HashRouter>
                     <Switch>
                         <Route path="/article/:id" component={Browse}></Route>
+                        <Route path="/studio" component={Studio}></Route>
                         <Route path="/" exact component={Home}></Route>
                     </Switch>
                 </HashRouter>
