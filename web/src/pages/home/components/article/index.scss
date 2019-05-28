@@ -1,0 +1,21 @@
+.article-item-container {
+    .title {
+        color: #d23669;
+        font-size: 28px;
+        a {
+            text-decoration: none;
+            color:inherit;
+        }
+    }
+    .time {
+        font-size: 22px;
+        margin-top: 14px;
+    }
+    .describe {
+        font-size: 22px;
+        margin-top: 14px;
+    }
+    & + & {
+        margin-top: 50px;
+    }
+}

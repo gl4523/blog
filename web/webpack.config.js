@@ -15,6 +15,15 @@ module.exports = {
         rules: [{
             test: /\.tsx?$/,
             loader: 'babel-loader'
+        }, {
+            test: /\.(png|jpg|gif)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 1024,
+                    name: 'assets/[name].[ext]'
+                }
+            }
         }, ...rules]
     },
     plugins: [

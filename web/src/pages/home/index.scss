@@ -1,0 +1,11 @@
+.introduce-comp-container {
+    width: 400px;
+}
+@media screen and (max-width: 460px) {
+    .introduce-comp-container {
+        max-width: 100%;
+    }
+}
+.articles-list {
+    padding-top: 50px;
+}
