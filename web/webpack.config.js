@@ -39,6 +39,11 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.json']
     },
     devtool: !isProd && 'inline-source-map',
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
     devServer: {
         hot: true,
         open: true,
