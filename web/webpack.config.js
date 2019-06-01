@@ -2,13 +2,14 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const {resolve} = require('path')
 const isProd = process.env.NODE_ENV === 'production'
 const {rules = [], plugins = []} = require('./build')(isProd)
+const publicPath = isProd ? 'https://gl4523.github.io/blog' : '/'
 module.exports = {
     entry: {
         main: './src/main.tsx'
     },
     output: {
         path: resolve(__dirname, '..', 'docs'),
-        publicPath: isProd ? 'https://gl4523.github.io/blog' : '/',
+        publicPath,
         filename: 'js/[name]_[hash:6].js'
     },
     module: {
@@ -21,7 +22,8 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 1024,
-                    name: 'assets/[name].[ext]'
+                    name: 'assets/[name].[ext]',
+                    publicPath
                 }
             }
         }, ...rules]
