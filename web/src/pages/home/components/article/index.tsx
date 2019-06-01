@@ -6,7 +6,7 @@ interface IArticle {
         title: string,
         describe: string,
         time: number,
-        id: string
+        _id: string
     }
 }
 
@@ -16,17 +16,17 @@ class Article extends Component<IArticle["props"]> {
     }
 
     render() {
-        const {id} = this.props
+        const {_id, title, time, describe} = this.props
         return (
             <div className="article-item-container">
                 <div className="title">
-                    <span><Link to={`/article/123`}>标题标题标题</Link></span>
+                    <span><Link to={`/article/${_id}`}>{title}</Link></span>
                 </div>
                 <div className="time">
-                    <span>January 03, 2019</span>
+                    <span>{new Date(time).toDateString()}</span>
                 </div>
                 <div className="describe">
-                    <span>这篇文章总结了我入门年段这一年半以来的一些东西，希望能让你有所帮助</span>
+                    <span>{describe}</span>
                 </div>
             </div>
         )

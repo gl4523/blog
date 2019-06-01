@@ -5,17 +5,23 @@ import hljs from 'highlight.js'
 import Logo from '../../components/Logo'
 import {ServerUrl} from '../../const'
 import axios from 'axios'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+import 'highlight.js/styles/mono-blue.css'
+
+export type ArticleItemType = {
+    _id: string,
+    time: number,
+    content: string,
+    title: string,
+    describe: string
+}
 interface IBrowse {
     state: {
-        article?: {
-            _id: number,
-            time: number,
-            content: string,
-            title: string,
-            describe: string
-        }
+        article?: ArticleItemType
     }
 }
+// @setTitle("blog title")
 class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["state"]> {
     private _cancelToken: {token, cancel}
     constructor(props) {
@@ -24,6 +30,7 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
     }
 
     componentWillMount() {
+        nprogress.start()
         marked.setOptions({
             highlight: code => hljs.highlightAuto(code).value
         })
@@ -31,10 +38,16 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
 
     componentDidMount() {
         this.fetchData()
+        nprogress.inc(0.7)
     }
 
     componentWillUnmount() {
         this.getRequestCancelTag().cancel()
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        const {article = {}} = nextState
+        document.title = article.title || ""
     }
 
     render() {
@@ -56,11 +69,11 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
      */
     fetchData() {
         const {id} = this.props.match.params
-        const url = `${ServerUrl}/blog/article/5ced4fd0fafa7c072862dd5f`
-
+        const url = `${ServerUrl}/blog/article/5cf2875e7455e32af02c47c3`
         axios.get(url, {
             cancelToken: this.getRequestCancelTag().token
         }).then(res => {
+            nprogress.done()
             const {code, data} = res.data
             if (code) {
                 // TODO

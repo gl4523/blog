@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import ReactMarkDown from 'react-markdown'
 import {Switch, Route, HashRouter} from 'react-router-dom'
 import Home from './pages/home'
 import Browse from './pages/browse'

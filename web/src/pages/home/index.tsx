@@ -6,10 +6,11 @@ import Logo from '../../components/Logo'
 import BottomNav from '../../components/BottomNav'
 import {ServerUrl} from '../../const'
 import axios from 'axios'
+import { ArticleItemType } from '../browse'
 import './index.scss'
 interface IHome {
     state: {
-        list: any[]
+        list: ArticleItemType[]
     }
 }
 class HomePage extends Component<RouteComponentProps, IHome["state"]> {
@@ -21,6 +22,7 @@ class HomePage extends Component<RouteComponentProps, IHome["state"]> {
 
     componentDidMount() {
         this.fetchData()
+        document.title = "Gump Blog"
     }
 
     componentWillUnmount() {
@@ -28,6 +30,7 @@ class HomePage extends Component<RouteComponentProps, IHome["state"]> {
     }
 
     render() {
+        const {list = []} = this.state
         return (
             <div className="home-page-container">
                 <div className="title-container">
@@ -37,11 +40,7 @@ class HomePage extends Component<RouteComponentProps, IHome["state"]> {
                     <Introduce />
                 </div>
                 <div className="articles-list">
-                    <Article />
-                    <Article />
-                    <Article />
-                    <Article />
-                    <Article />
+                    {list.length && list.map(item => <Article key={item._id} _id={item._id} time={item.time} title={item.title} describe={item.describe} />)}
                 </div>
                 <div className="bottom-container">
                     <BottomNav />
