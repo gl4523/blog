@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {RouteComponentProps} from 'react-router-dom'
-import ReactMarkDown from 'react-markdown'
+import marked from 'marked'
+import hljs from 'highlight.js'
 import Logo from '../../components/Logo'
 import {ServerUrl} from '../../const'
 import axios from 'axios'
@@ -22,6 +23,12 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
         this.state = {}
     }
 
+    componentWillMount() {
+        marked.setOptions({
+            highlight: code => hljs.highlightAuto(code).value
+        })
+    }
+
     componentDidMount() {
         this.fetchData()
     }
@@ -37,8 +44,8 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
                 <div className="title-container">
                     <Logo />
                 </div>
-                <div className="md-body">
-                    {article && <ReactMarkDown source={article.content} />}
+                <div className="markdown-body">
+                    {article && <div dangerouslySetInnerHTML={{__html: marked(article.content)}} />}
                 </div>
             </div>
         )

@@ -17,6 +17,8 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/highlight.js": "^9.12.3",
+    "@types/marked": "^0.6.5",
     "@types/node": "^12.0.2",
     "@types/react-router-dom": "^4.3.3",
     "babel-loader": "^8.0.6",
@@ -38,9 +40,10 @@
     "@types/react": "^16.8.18",
     "@types/react-dom": "^16.8.4",
     "axios": "^0.18.0",
+    "highlight.js": "^9.15.8",
+    "marked": "^0.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-markdown": "^4.0.8",
     "react-router-dom": "^5.0.0"
   }
 }
