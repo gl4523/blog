@@ -8,7 +8,7 @@ module.exports = {
     },
     output: {
         path: resolve(__dirname, '..', 'docs'),
-        publicPath: '/',
+        publicPath: isProd ? 'https://gl4523.github.io/blog' : '/',
         filename: 'js/[name]_[hash:6].js'
     },
     module: {
