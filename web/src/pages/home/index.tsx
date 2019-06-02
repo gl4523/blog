@@ -40,7 +40,7 @@ class HomePage extends Component<RouteComponentProps, IHome["state"]> {
                     <Introduce />
                 </div>
                 <div className="articles-list">
-                    {list.length && list.map(item => <Article key={item._id} _id={item._id} time={item.time} title={item.title} describe={item.describe} />)}
+                    {list.length ? list.map(item => <Article key={item._id} _id={item._id} time={item.time} title={item.title} describe={item.describe} />) : null}
                 </div>
                 <div className="bottom-container">
                     <BottomNav />

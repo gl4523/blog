@@ -2,8 +2,9 @@ const webpack = require('webpack')
 module.exports = isProd => {
     let rules
     let plugins 
-
+    let publicPath
     if (isProd) {
+        publicPath = 'https://gl4523.github.io/blog'
         rules = [{
             test: /\.css$/,
             use: [{
@@ -22,6 +23,7 @@ module.exports = isProd => {
             }]
         }]
     } else {
+        publicPath = '/'
         plugins = [
             new webpack.HotModuleReplacementPlugin()
         ]
@@ -45,5 +47,5 @@ module.exports = isProd => {
         }]
     }
 
-    return {rules, plugins}
+    return {rules, plugins, publicPath}
 }

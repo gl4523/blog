@@ -1,8 +1,7 @@
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const {resolve} = require('path')
 const isProd = process.env.NODE_ENV === 'production'
-const {rules = [], plugins = []} = require('./build')(isProd)
-const publicPath = isProd ? 'https://gl4523.github.io/blog' : '/'
+const {rules = [], plugins = [], publicPath} = require('./build')(isProd)
 module.exports = {
     entry: {
         main: './src/main.tsx'
@@ -28,6 +27,11 @@ module.exports = {
             }
         }, ...rules]
     },
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'highlight.js': 'hljs'
+    },
     plugins: [
         new htmlWebpackPlugin({
             template: './index.html',
@@ -36,7 +40,7 @@ module.exports = {
         ...plugins
     ],
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
     },
     devtool: !isProd && 'inline-source-map',
     optimization: {

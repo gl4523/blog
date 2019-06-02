@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 import {ServerUrl} from '../../const'
+import {isLocal} from '../../utils'
 import './index.scss'
+
 interface IStudio {
   state: {
     title: string,
@@ -19,7 +22,8 @@ class StudioPage extends Component<any, IStudio["state"]> {
     }
   }
   render() {
-    return (
+  
+    return isLocal() ? (
       <div className="studio-container">
         <form>
           <div className="from-item">
@@ -51,7 +55,7 @@ class StudioPage extends Component<any, IStudio["state"]> {
         </form>
         <button onClick={this.handleClickSubmit}>提交</button>
       </div>
-    )
+    ) : <Redirect to="/" />
   }
 
   getHandleChange = (key: string) => {
