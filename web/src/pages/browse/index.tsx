@@ -69,7 +69,7 @@ class BrowsePage extends Component<RouteComponentProps<{id: string}>, IBrowse["s
      */
     fetchData() {
         const {id} = this.props.match.params
-        const url = `${ServerUrl}/blog/article/5cf2875e7455e32af02c47c3`
+        const url = `${ServerUrl}/blog/article/${id}`
         axios.get(url, {
             cancelToken: this.getRequestCancelTag().token
         }).then(res => {
