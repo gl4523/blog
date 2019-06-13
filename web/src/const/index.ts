@@ -1,6 +1,6 @@
 let ServerUrl
 if (process.env.NODE_ENV === "production") {
-    ServerUrl = "http://193.112.11.35"
+    ServerUrl = "https://gump.fun"
 } else {
     ServerUrl = "http://127.0.0.1:3000"
 }
